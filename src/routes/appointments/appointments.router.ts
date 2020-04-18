@@ -1,12 +1,23 @@
 import { Router } from 'express';
+import { uuid } from 'uuidv4';
 
 const appointmentRouter = Router();
 
-appointmentRouter.get('/', (req, res) => res.json({ status: 'ok' }));
+const appointments = [];
+
+// appointmentRouter.get('/', (req, res) => res.json({ appointments }));
 
 appointmentRouter.post('/', (req, res) => {
-	const { name, email } = req.body;
-	return res.status(201).json({ status: { name, email } });
+	const { provider, date } = req.body;
+
+	const appointment = {
+		id: uuid(),
+		provider,
+		date,
+	};
+
+	appointments.push(appointment);
+	return res.status(201).json({ status: { appointment } });
 });
 
 export default appointmentRouter;
