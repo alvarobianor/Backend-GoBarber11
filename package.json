@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts"
+		"dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/app.ts"
 	},
 	"dependencies": {
 		"eslint-import-resolver-typescript": "^2.0.0",
