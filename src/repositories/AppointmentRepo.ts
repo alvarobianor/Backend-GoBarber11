@@ -9,7 +9,7 @@ class AppointmentRepo {
 		this.appointments = [];
 	}
 
-	public get getAppointment(): Appointment[] {
+	public all(): Appointment[] {
 		return this.appointments;
 	}
 

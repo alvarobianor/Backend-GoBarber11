@@ -10,7 +10,9 @@ const appointmentRouter = Router();
 
 const appointmentsRepo = new Repo();
 
-// appointmentRouter.get('/', (req, res) => res.json({ appointments }));
+appointmentRouter.get('/', (req, res) =>
+	res.json({ appointments: appointmentsRepo.all() }),
+);
 
 appointmentRouter.post('/', (req, res) => {
 	const { provider, date } = req.body;
