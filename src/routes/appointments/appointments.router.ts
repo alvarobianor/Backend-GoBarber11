@@ -25,7 +25,7 @@ appointmentRouter.post('/', (req, res) => {
 		return res.status(401).json({ error: 'this appointment is alredy booked' });
 	}
 
-	const appointment = appointmentsRepo.create(provider, parsedDate);
+	const appointment = appointmentsRepo.create({ provider, date: parsedDate });
 	return res.status(201).json(appointment);
 });
 
