@@ -1,3 +1,4 @@
+import { getCustomRepository } from 'typeorm';
 import { startOfHour } from 'date-fns';
 import Appointment from '../models/Appointment';
 import Repo from '../repositories/AppointmentRepo';
@@ -8,17 +9,12 @@ interface RequestDTO {
 }
 
 class CreateAppointmentService {
-	// eslint-disable-next-line prettier/prettier
-	private appointmentsRepo: Repo;
+	public async execute({ provider, date }: RequestDTO): Promise<Appointment> {
+		const appointmentsRepo = getCustomRepository(Repo);
 
-	constructor(appointmentsRepo: Repo) {
-		this.appointmentsRepo = appointmentsRepo;
-	}
-
-	public execute({ provider, date }: RequestDTO): Appointment {
 		const appointmentDate = startOfHour(date);
 
-		const findAppointmentInSameDate = this.appointmentsRepo.findByDate(
+		const findAppointmentInSameDate = await appointmentsRepo.findByDate(
 			appointmentDate,
 		);
 
@@ -26,10 +22,13 @@ class CreateAppointmentService {
 			throw Error('this appointment is alredy booked');
 		}
 
-		const appointment = this.appointmentsRepo.create({
+		const appointment = appointmentsRepo.create({
 			provider,
 			date: appointmentDate,
 		});
+
+		await appointmentsRepo.save(appointment);
+
 		return appointment;
 	}
 }
