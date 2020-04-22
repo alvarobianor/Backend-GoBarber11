@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	CreateDateColumn,
+	UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('appointments')
 class Appointment {
@@ -11,6 +17,11 @@ class Appointment {
 	@Column('time with time zone')
 	date: Date;
 
+	@CreateDateColumn()
+	created_at: Date;
+
+	@UpdateDateColumn()
+	updated_at: Date;
 	// // Omit <T, K -> A | B>
 	// constructor({ provider, date }: Omit<Appointment, 'id'>) {
 	// 	this.id = uuid();
