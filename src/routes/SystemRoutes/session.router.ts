@@ -10,9 +10,9 @@ usersRouter.post('/', async (req, res) => {
 	try {
 		const { email, password } = req.body;
 		const service = new Service();
-		const { user } = await service.execute({ email, password });
+		const { user, token } = await service.execute({ email, password });
 		delete user.password;
-		return res.json({ user });
+		return res.json({ user, token });
 	} catch (error) {
 		return res.status(401).json({ error: error.message });
 	}
