@@ -1,11 +1,12 @@
 import { Router } from 'express';
 // import { getRepository } from 'typeorm';
 import Service from '../../services/CreateUserService';
+import Auth from '../../middlewares/ensureAuthenticated';
 
 // initial of a route
 
 const usersRouter = Router();
-
+usersRouter.use(Auth);
 // ROUTES
 
 usersRouter.post('/', async (req, res) => {
