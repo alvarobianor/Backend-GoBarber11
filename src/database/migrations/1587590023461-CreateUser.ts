@@ -30,15 +30,15 @@ export default class CreateUser1587590023461 implements MigrationInterface {
 						isUnique: true,
 					},
 					{
-						name: 'creted_at',
+						name: 'created_at',
 						type: 'timestamp',
-						isNullable: false,
+						// isNullable: false,
 						default: 'now()',
 					},
 					{
 						name: 'updated_at',
 						type: 'timestamp',
-						isNullable: false,
+						// isNullable: false,
 						default: 'now()',
 					},
 				],
