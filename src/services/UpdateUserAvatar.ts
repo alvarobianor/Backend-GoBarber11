@@ -19,7 +19,7 @@ class UpdateUserAvatarService {
 		if (user.avatar) {
 			const userAvatarFilePath = path.join(
 				uploadConfigs.directory,
-				avatarFileName, // juntar os caminhos
+				user.avatar, // juntar os caminhos
 			);
 			const userAvatarFileExist = await fs.promises.stat(userAvatarFilePath);
 			// verifica se já existe, se existir ele deleta o arquivo dese user
