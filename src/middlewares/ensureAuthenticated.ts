@@ -20,8 +20,8 @@ export default function ensureAuthenticated(
 	const [, token] = authHeader.split(' ');
 	try {
 		const isValidToken = verify(token, Auth.jwt.secret);
-		const { sub } = isValidToken as JWTToken;
-		req.user = { id: sub };
+		const { sub } = isValidToken as JWTToken; // forçar um tipo usa o 'as'
+		req.user = { id: sub }; // tem que sobrescrever o @types do request do express
 		return next();
 	} catch {
 		throw new Error('JWT token is wrong');
