@@ -4,6 +4,8 @@ import fs from 'fs';
 import User from '../models/User';
 import uploadConfigs from '../config/upload';
 
+import AppError from '../errors/AppError';
+
 interface RequestDTO {
 	user_id: string;
 	avatarFileName: string;
@@ -14,7 +16,7 @@ class UpdateUserAvatarService {
 		const repositoryUser = getRepository(User);
 		const user = await repositoryUser.findOne({ where: { id: user_id } });
 		if (!user) {
-			throw new Error('Just users loged can change avatar!');
+			throw new AppError('Just users loged can change avatar!', 401);
 		}
 		if (user.avatar) {
 			const userAvatarFilePath = path.join(

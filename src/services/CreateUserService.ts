@@ -3,6 +3,8 @@ import { hash } from 'bcrypt';
 
 import User from '../models/User';
 
+import AppError from '../errors/AppError';
+
 interface RequetDTO {
 	name: string;
 	email: string;
@@ -15,7 +17,7 @@ class CreateUserService {
 		const checkUserExists = await userRepository.findOne({ where: { email } });
 
 		if (checkUserExists) {
-			throw Error('Email alredy exists/used');
+			throw new AppError('Email alredy exists/used', 401);
 		}
 
 		const passwordHash = await hash(password, 9);

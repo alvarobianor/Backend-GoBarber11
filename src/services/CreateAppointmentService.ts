@@ -3,6 +3,8 @@ import { startOfHour } from 'date-fns';
 import Appointment from '../models/Appointment';
 import Repo from '../repositories/AppointmentRepo';
 
+import AppError from '../errors/AppError';
+
 interface RequestDTO {
 	provider_id: string;
 	date: Date;
@@ -22,7 +24,7 @@ class CreateAppointmentService {
 		);
 
 		if (findAppointmentInSameDate) {
-			throw Error('this appointment is alredy booked');
+			throw new AppError('this appointment is alredy booked');
 		}
 
 		const appointment = appointmentsRepo.create({
